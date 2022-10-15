@@ -1,7 +1,7 @@
 package stock;
 
 import java.io.*;
-// import java.util.*;
+import java.util.*;
 import org.json.simple.*;
 import org.json.simple.parser.*;
 
@@ -10,17 +10,33 @@ public class App {
         JSONParser parser = new JSONParser();
 
         try{
-            Object obj = parser.parse(new FileReader("stockgen/stock_transations-3.by.account.holder.json"));
-            // JSONObject jsonObject = (JSONObject)obj;
-            JSONArray array = (JSONArray)obj;
-            System.out.println(array);
-            // String Fname = (String)jsonObject.get("first_name");
-            // String Lname = (String)jsonObject.get("last_name");
-            // long accountNum = (long)jsonObject.get("account_number");
-            // String social = (String)jsonObject.get("ssn");
+            // Object obj = parser.parse(new FileReader("stockgen/stock_transations-3.by.account.holder.json"));
+            Object obj = parser.parse(new FileReader("stockgen/dummy.json"));
+            JSONObject jsonObject = (JSONObject)obj;
+            // JSONArray array = (JSONArray)obj;
+            // System.out.println(array);
+            String Fname = (String)jsonObject.get("first_name");
+            String Lname = (String)jsonObject.get("last_name");
+            long accountNum = (long)jsonObject.get("account_number");
+            String social = (String)jsonObject.get("ssn");
+            String email = (String)jsonObject.get("email");
+            String phone = (String)jsonObject.get("phone");
+            String begBal = (String)jsonObject.get("beginning_balance");
+
+            System.out.println("Account number: " +accountNum);
+            System.out.println("Name: " + Fname + Lname);
+            System.out.println("Social: " + social);
+            System.out.println("Email: " + email);
+            System.out.println("Phone" + phone);
+            System.out.println("Begining bal: " + begBal);
+
+            JSONArray stockTrades = (JSONArray)jsonObject.get("stock_trades");
+            Iterator iterator = stockTrades.iterator();
+            while(iterator.hasNext()){
+                System.out.println((iterator.next()));
+            }
 
 
-            // System.out.println("Name: " + Fname + Lname);
         }catch(Exception e){
             e.printStackTrace();
         }
