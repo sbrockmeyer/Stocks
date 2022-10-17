@@ -11,35 +11,20 @@ public class App {
 
         try{
             JSONArray jsonObject = (JSONArray) parser.parse(new FileReader("stockgen/stock_transations-3.by.account.holder.json"));
-            // JSONObject jsonObject = (JSONObject)parser.parse(new FileReader("stockgen/dummy.json"));
-            // JSONObject jsonObject = (JSONObject)obj;
-            
-            // JSONArray array = (JSONArray)obj;
-            // System.out.println(array);
-            System.out.println("here is one person: ");
-            System.out.println(jsonObject.get(0));
 
-            // String Fname = (String)jsonObject.get("first_name");
-            // String Lname = (String)jsonObject.get("last_name");
-            // long accountNum = (long)jsonObject.get("account_number");
-            // String social = (String)jsonObject.get("ssn");
-            // String email = (String)jsonObject.get("email");
-            // String phone = (String)jsonObject.get("phone");
-            // String begBal = (String)jsonObject.get("beginning_balance");
+            for(int i = 0; i < 1; i++){
+                JSONObject object = (JSONObject) jsonObject.get(i);
+                System.out.println(object.keySet());
 
-            // System.out.println("Account number: " +accountNum);
-            // System.out.println("Name: " + Fname + Lname);
-            // System.out.println("Social: " + social);
-            // System.out.println("Email: " + email);
-            // System.out.println("Phone" + phone);
-            // System.out.println("Begining bal: " + begBal);
+                System.out.println(object.get("account_number"));
 
-            // JSONArray stockTrades = (JSONArray)jsonObject.get("stock_trades");
-            // Iterator iterator = stockTrades.iterator();
-            // while(iterator.hasNext()){
-            //     System.out.println((iterator.next()));
-            // }
+                JSONArray stockArray = (JSONArray) object.get("stock_trades");
 
+                for(int j = 0; j < stockArray.size(); j++){
+                    //if buy - remove cash
+                    //if sell - add
+                }
+            }
 
         }catch(Exception e){
             e.printStackTrace();
