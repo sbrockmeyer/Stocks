@@ -10,12 +10,14 @@ public class App {
         JSONParser parser = new JSONParser();
 
         try{
-            // Object obj = parser.parse(new FileReader("stockgen/stock_transations-3.by.account.holder.json"));
-            Object obj = parser.parse(new FileReader("stockgen/dummy.json"));
+            JSONArray jsonObject = (JSONArray) parser.parse(new FileReader("stockgen/stock_transations-3.by.account.holder.json"));
+            // JSONObject jsonObject = (JSONObject)parser.parse(new FileReader("stockgen/dummy.json"));
             // JSONObject jsonObject = (JSONObject)obj;
             
             // JSONArray array = (JSONArray)obj;
             // System.out.println(array);
+            System.out.println("here is one person: ");
+            System.out.println(jsonObject.get(0));
 
             // String Fname = (String)jsonObject.get("first_name");
             // String Lname = (String)jsonObject.get("last_name");
