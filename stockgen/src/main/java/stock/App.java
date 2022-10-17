@@ -40,5 +40,30 @@ public class App {
         }catch(Exception e){
             e.printStackTrace();
         }
+
+        // Create File
+        try{
+            File myObj = new File("doc.txt");
+            if(myObj.createNewFile()){
+                System.out.println("File Created: " + myObj.getName());
+            }else{
+                System.out.println("File already exists");
+            }
+        }catch(IOException e){
+            System.out.println("Error");
+            e.printStackTrace();
+        }
+
+        // Write to file
+        try{
+            FileWriter myWriter = new FileWriter("doc.txt");
+            myWriter.write("hi");
+            myWriter.close();
+            System.out.println("You wrote to the file");
+        }catch (IOException e){
+            System.out.println("error");
+            e.printStackTrace();
+        }
+
     }
 }
