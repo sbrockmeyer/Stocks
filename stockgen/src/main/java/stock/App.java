@@ -10,14 +10,12 @@ public class App {
         JSONParser parser = new JSONParser();
 
         try{
-            JSONObject jsonObject = (JSONObject)parser.parse(new FileReader("stockgen/stock_transations-3.by.account.holder.json"));
-            // Object obj = parser.parse(new FileReader("stockgen/dummy.json"));
+            // Object obj = parser.parse(new FileReader("stockgen/stock_transations-3.by.account.holder.json"));
+            Object obj = parser.parse(new FileReader("stockgen/dummy.json"));
             // JSONObject jsonObject = (JSONObject)obj;
-
+            
             // JSONArray array = (JSONArray)obj;
             // System.out.println(array);
-
-            
 
             // String Fname = (String)jsonObject.get("first_name");
             // String Lname = (String)jsonObject.get("last_name");
@@ -46,28 +44,28 @@ public class App {
         }
 
         // Create File
-        try{
-            File myObj = new File("doc.txt");
-            if(myObj.createNewFile()){
-                System.out.println("File Created: " + myObj.getName());
-            }else{
-                System.out.println("File already exists");
-            }
-        }catch(IOException e){
-            System.out.println("Error");
-            e.printStackTrace();
-        }
+        // try{
+        //     File myObj = new File("doc.txt");
+        //     if(myObj.createNewFile()){
+        //         System.out.println("File Created: " + myObj.getName());
+        //     }else{
+        //         System.out.println("File already exists");
+        //     }
+        // }catch(IOException e){
+        //     System.out.println("Error");
+        //     e.printStackTrace();
+        // }
 
         // Write to file
-        try{
-            FileWriter myWriter = new FileWriter("doc.txt");
-            myWriter.write("hi");
-            myWriter.close();
-            System.out.println("You wrote to the file");
-        }catch (IOException e){
-            System.out.println("error");
-            e.printStackTrace();
-        }
+        // try{
+        //     FileWriter myWriter = new FileWriter("doc.txt");
+        //     myWriter.write("hi");
+        //     myWriter.close();
+        //     System.out.println("You wrote to the file");
+        // }catch (IOException e){
+        //     System.out.println("error");
+        //     e.printStackTrace();
+        // }
 
     }
 }
