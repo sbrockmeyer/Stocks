@@ -10,10 +10,10 @@ public class App {
         JSONParser parser = new JSONParser();
 
         try{
-            JSONArray jsonObject = (JSONArray) parser.parse(new FileReader("stockgen/stock_transations-3.by.account.holder.json"));
+            JSONArray jsonArray = (JSONArray) parser.parse(new FileReader("stockgen/stock_transations-3.by.account.holder.json"));
 
             for(int i = 0; i < 1; i++){
-                JSONObject object = (JSONObject) jsonObject.get(i);
+                JSONObject object = (JSONObject) jsonArray.get(i);
                 System.out.println(object.keySet());
 
                 System.out.println(object.get("account_number"));
@@ -38,10 +38,12 @@ public class App {
                     System.out.println(object2.get("count_shares"));
                     System.out.println(object2.get("price_per_share"));
 
-                    if (type == "buy") {
+                    if (type.equals("Buy")) {
                         System.out.println("Buyyyyyyyyyy");
-                    } else {
+                    }else if(type.equals("Sell")) {
                         System.out.println("Sellllllllll");
+                    }else{
+                        System.out.println("something isnt right");
                     }
 
                 }
