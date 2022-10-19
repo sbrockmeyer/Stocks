@@ -1,6 +1,7 @@
 package stock;
 
 import java.io.*;
+import java.text.FieldPosition;
 import java.util.*;
 import org.json.simple.*;
 import org.json.simple.parser.*;
@@ -25,6 +26,8 @@ public class App {
 
                 String beginningBal = (String)object.get("beginning_balance");
                 System.out.println(beginningBal);
+                // int bal = Integer.parseInt(beginningBal);
+                Float bal = Float.parseFloat(beginningBal);
 
                 JSONArray stockArray = (JSONArray) object.get("stock_trades");
 
@@ -37,11 +40,18 @@ public class App {
                     System.out.println(object2.get("stock_symbol"));
                     System.out.println(object2.get("count_shares"));
                     System.out.println(object2.get("price_per_share"));
+                    String price = (String) object2.get("price_per_share");
+                    System.out.println(price);
+                    Float sharePrice = Float.parseFloat(price);
 
                     if (type.equals("Buy")) {
-                        System.out.println("Buyyyyyyyyyy");
+                        Float newbal = bal - sharePrice;
+                        System.out.println(newbal);
+                        
                     }else if(type.equals("Sell")) {
-                        System.out.println("Sellllllllll");
+                        Float newbal = bal + sharePrice;
+                        System.out.println(newbal);
+
                     }else{
                         System.out.println("something isnt right");
                     }
