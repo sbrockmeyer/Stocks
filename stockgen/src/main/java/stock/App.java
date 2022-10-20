@@ -9,6 +9,7 @@ import org.json.simple.parser.*;
 public class App {
     public static void main (String[] args){
         JSONParser parser = new JSONParser();
+        Float newBal;
 
         try{
             JSONArray jsonArray = (JSONArray) parser.parse(new FileReader("stockgen/stock_transations-3.by.account.holder.json"));
@@ -45,12 +46,12 @@ public class App {
                     Float sharePrice = Float.parseFloat(price);
 
                     if (type.equals("Buy")) {
-                        Float newbal = bal - sharePrice;
-                        System.out.println(newbal);
+                        newBal = bal - sharePrice;
+                        System.out.println(newBal);
                         
                     }else if(type.equals("Sell")) {
-                        Float newbal = bal + sharePrice;
-                        System.out.println(newbal);
+                        newBal = bal + sharePrice;
+                        System.out.println(newBal);
 
                     }else{
                         System.out.println("something isnt right");
