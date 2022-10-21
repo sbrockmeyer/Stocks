@@ -28,30 +28,39 @@ public class App {
                 String beginningBal = (String)object.get("beginning_balance");
                 System.out.println(beginningBal);
                 // int bal = Integer.parseInt(beginningBal);
-                Float bal = Float.parseFloat(beginningBal);
+                // Float bal = Float.parseFloat(beginningBal);
+                String begBal = beginningBal.replaceAll(("\\$"), "");
+                Float bal = Float.parseFloat(begBal);
 
                 JSONArray stockArray = (JSONArray) object.get("stock_trades");
 
                 for(int j = 0; j < stockArray.size(); j++){
                     JSONObject object2 = (JSONObject) stockArray.get(j);
                     String type = (String) object2.get("type");
+                    Long countShare = (Long) object2.get("count_shares"); 
+                    Float shares = (Float) countShare.floatValue();
                     System.out.println("________________________");
-                    System.out.println("a " + type);
+                    // System.out.println("a " + type)/;
                     System.out.println(object2.get("type"));
                     System.out.println(object2.get("stock_symbol"));
                     System.out.println(object2.get("count_shares"));
                     System.out.println(object2.get("price_per_share"));
                     String price = (String) object2.get("price_per_share");
-                    System.out.println(price);
-                    Float sharePrice = Float.parseFloat(price);
+                    // System.out.println(price);
+                    String priceShare = price.replaceAll(("\\$"), "");
+                    Float sharePrice = Float.parseFloat(priceShare);
 
                     if (type.equals("Buy")) {
-                        newBal = bal - sharePrice;
-                        System.out.println(newBal);
+                        Float fullCost = sharePrice*shares;
+                        // System.out.println(fullCost);
+                        newBal = bal - fullCost;
+                        System.out.println("here is new bal $"+newBal);
                         
                     }else if(type.equals("Sell")) {
-                        newBal = bal + sharePrice;
-                        System.out.println(newBal);
+                        Float fullCost = sharePrice*shares;
+                        // System.out.println(fullCost);
+                        newBal = bal + fullCost;
+                        System.out.println( "here is new bal $"+ newBal);
 
                     }else{
                         System.out.println("something isnt right");
