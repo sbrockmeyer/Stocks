@@ -1,7 +1,6 @@
 package stock;
 
 import java.io.*;
-import java.text.FieldPosition;
 import java.util.*;
 import org.json.simple.*;
 import org.json.simple.parser.*;
@@ -10,63 +9,103 @@ public class App {
     public static void main (String[] args){
         JSONParser parser = new JSONParser();
         Float newBal;
+        Long accountNum;
+        String fName;
+        String lName;
+        String social;
+        String email;
+        String phone;
 
+        String type;
+        Long countShare;
+        String price;
+        String symbol;
+        
         try{
             JSONArray jsonArray = (JSONArray) parser.parse(new FileReader("stockgen/stock_transations-3.by.account.holder.json"));
-
+            
             for(int i = 0; i < 1; i++){
                 JSONObject object = (JSONObject) jsonArray.get(i);
                 System.out.println(object.keySet());
-
-                System.out.println(object.get("account_number"));
-                System.out.println(object.get("first_name"));
-                System.out.println(object.get("last_name"));
-                System.out.println(object.get("ssn"));
-                System.out.println(object.get("email"));
-                System.out.println(object.get("phone"));
-
+                
+                accountNum = (Long) object.get("account_number");
+                fName = (String) object.get("first_name");
+                lName = (String) object.get("last_name");
+                social = (String) object.get("ssn");
+                email = (String) object.get("email");
+                phone = (String) object.get("phone");
+                
+                System.out.println(accountNum);
+                System.out.println(fName + " " + lName);
+                System.out.println(social);
+                System.out.println(email);
+                System.out.println(phone);
+                
+                
                 String beginningBal = (String)object.get("beginning_balance");
                 System.out.println(beginningBal);
-                // int bal = Integer.parseInt(beginningBal);
-                // Float bal = Float.parseFloat(beginningBal);
+                
                 String begBal = beginningBal.replaceAll(("\\$"), "");
                 Float bal = Float.parseFloat(begBal);
-
+                
                 JSONArray stockArray = (JSONArray) object.get("stock_trades");
-
-                for(int j = 0; j < stockArray.size(); j++){
-                    JSONObject object2 = (JSONObject) stockArray.get(j);
-                    String type = (String) object2.get("type");
-                    Long countShare = (Long) object2.get("count_shares"); 
+                
+                for(int a = 0; a < stockArray.size(); a++){
+                    JSONObject object2 = (JSONObject) stockArray.get(a);
+                    
+                    type = (String) object2.get("type");
+                    countShare = (Long) object2.get("count_shares"); 
                     Float shares = (Float) countShare.floatValue();
+                    symbol = (String) object2.get("stock_symbol");
+                    Float startStock;
+                    
                     System.out.println("________________________");
                     // System.out.println("a " + type)/;
                     System.out.println(object2.get("type"));
-                    System.out.println(object2.get("stock_symbol"));
+                    System.out.println(symbol);
                     System.out.println(object2.get("count_shares"));
                     System.out.println(object2.get("price_per_share"));
-                    String price = (String) object2.get("price_per_share");
-                    // System.out.println(price);
+                    
+                    price = (String) object2.get("price_per_share");
                     String priceShare = price.replaceAll(("\\$"), "");
                     Float sharePrice = Float.parseFloat(priceShare);
 
                     if (type.equals("Buy")) {
                         Float fullCost = sharePrice*shares;
-                        // System.out.println(fullCost);
                         newBal = bal - fullCost;
+                        startStock =  +shares;
+                        System.out.println(startStock);
                         System.out.println("here is new bal $"+newBal);
                         
                     }else if(type.equals("Sell")) {
                         Float fullCost = sharePrice*shares;
-                        // System.out.println(fullCost);
                         newBal = bal + fullCost;
+                        startStock= -shares;
+                        System.out.println(startStock);
                         System.out.println( "here is new bal $"+ newBal);
 
                     }else{
                         System.out.println("something isnt right");
                     }
-
                 }
+
+                
+
+                File myObj = new File("stock.html");
+                if(myObj.createNewFile()){
+                    System.out.println("File created" + myObj.getName());
+                }else{
+                    System.out.println("File already exists");
+                }
+    
+                FileWriter myWriter = new FileWriter("stock.html");
+                myWriter.write(
+                    "<p>" + accountNum + "</p>" +
+                    "<p>" + fName + " " + lName + "</p>" + 
+                    "<p>" + social + "</p>" 
+                    );
+                myWriter.close();
+                System.out.println("wrote to file");
             }
 
         }catch(Exception e){
