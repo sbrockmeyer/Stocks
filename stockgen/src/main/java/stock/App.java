@@ -4,6 +4,7 @@ import java.io.*;
 import java.util.*;
 import org.json.simple.*;
 import org.json.simple.parser.*;
+import java.time.*;
 
 public class App {
     public static void main(String[] args) {
@@ -20,7 +21,9 @@ public class App {
         Long countShare;
         String price;
         String symbol;
+        LocalDate date = LocalDate.now();
         Float stockAmount;
+        Float fullCost;
 
         try {
             JSONArray jsonArray = (JSONArray) parser
@@ -72,14 +75,14 @@ public class App {
                     Float sharePrice = Float.parseFloat(priceShare);
 
                     if (type.equals("Buy")) {
-                        Float fullCost = sharePrice * shares;
+                        fullCost = sharePrice * shares;
                         newBal = bal - fullCost;
                         stockAmount = startStock + shares;
                         System.out.println(startStock);
                         System.out.println("here is new bal $" + newBal);
 
                     } else if (type.equals("Sell")) {
-                        Float fullCost = sharePrice * shares;
+                        fullCost = sharePrice * shares;
                         newBal = bal + fullCost;
                         stockAmount = startStock - shares;
                         System.out.println(startStock);
@@ -88,26 +91,29 @@ public class App {
                     } else {
                         System.out.println("something isnt right");
                     }
-                }
 
-                File myObj = new File("stock.html");
-                if (myObj.createNewFile()) {
-                    System.out.println("File created" + myObj.getName());
-                } else {
-                    System.out.println("File already exists");
-                }
+                    File myObj = new File("stock.html");
+                    if (myObj.createNewFile()) {
+                        System.out.println("File created" + myObj.getName());
+                    } else {
+                        System.out.println("File already exists");
+                    }
 
-                FileWriter myWriter = new FileWriter("stock.html");
-                myWriter.write(
-                        "<p>" + "Full Name: " + fName + " " + lName + "</p>" +
-                        "<p>" + "Social Security Number: " + social + "</p>" +
-                        "<p>" + "Email: " + email + "</p>" + 
-                        "<p>" + "Phone: " + phone + "</p>" + 
-                        "<p>" + "Account Number:  " + accountNum + "</p>" + 
-                        "<p>"
-                        );
-                myWriter.close();
-                System.out.println("wrote to file");
+                    FileWriter myWriter = new FileWriter("stock.html");
+                    myWriter.write(
+                            "<h1>" + date + "</h1>" +
+                                    "<p>" + "Full Name: " + fName + " " + lName + "</p>" +
+                                    "<p>" + "Social Security Number: " + social + "</p>" +
+                                    "<p>" + "Email: " + email + "</p>" +
+                                    "<p>" + "Phone: " + phone + "</p>" +
+                                    "<p>" + "Account #:  " + accountNum + "</p>" +
+                                    "<h3>" + "Type   Symbol  Price   Shares  Total" + "</h3>" +
+                                    "<p>" + type + symbol + price + stockAmount + fullCost + "</p>" +
+                                    "<p>" + newBal + "</p>"
+                    );
+                    myWriter.close();
+                    System.out.println("wrote to file");
+                }
             }
 
         } catch (Exception e) {
