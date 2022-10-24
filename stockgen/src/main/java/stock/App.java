@@ -1,15 +1,18 @@
 package stock;
 
-import java.io.*;
-import java.util.*;
-import org.json.simple.*;
-import org.json.simple.parser.*;
-import java.time.*;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.time.LocalDate;
+
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
 
 public class App {
     public static void main(String[] args) {
         JSONParser parser = new JSONParser();
-        Float newBal;
+        Float newBal = 0f;
         Long accountNum;
         String fName;
         String lName;
@@ -22,8 +25,8 @@ public class App {
         String price;
         String symbol;
         LocalDate date = LocalDate.now();
-        Float stockAmount;
-        Float fullCost;
+        Float stockAmount = 0f;
+        Float fullCost = 0f;
 
         try {
             JSONArray jsonArray = (JSONArray) parser
@@ -108,8 +111,8 @@ public class App {
                                     "<p>" + "Phone: " + phone + "</p>" +
                                     "<p>" + "Account #:  " + accountNum + "</p>" +
                                     "<h3>" + "Type   Symbol  Price   Shares  Total" + "</h3>" +
-                                    "<p>" + type + symbol + price + stockAmount + fullCost + "</p>" +
-                                    "<p>" + newBal + "</p>"
+                                    "<p>" + type + " " + symbol + " " + price +  " " + stockAmount + " " + fullCost + "</p>" +
+                                    "<p>" + "Full balance: $"+ newBal + "</p>"
                     );
                     myWriter.close();
                     System.out.println("wrote to file");
