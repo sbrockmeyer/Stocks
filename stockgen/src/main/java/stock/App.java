@@ -29,8 +29,7 @@ public class App {
         Float fullCost = 0f;
 
         try {
-            JSONArray jsonArray = (JSONArray) parser
-                    .parse(new FileReader("stockgen/stock_transations-3.by.account.holder.json"));
+            JSONArray jsonArray = (JSONArray) parser.parse(new FileReader("stockgen/stock_transations-3.by.account.holder.json"));
 
             for (int i = 0; i < 1; i++) {
                 JSONObject object = (JSONObject) jsonArray.get(i);
@@ -111,9 +110,9 @@ public class App {
                                     "<p>" + "Phone: " + phone + "</p>" +
                                     "<p>" + "Account #:  " + accountNum + "</p>" +
                                     "<h3>" + "Type   Symbol  Price   Shares  Total" + "</h3>" +
-                                    "<p>" + type + " " + symbol + " " + price +  " " + stockAmount + " " + fullCost + "</p>" +
-                                    "<p>" + "Full balance: $"+ newBal + "</p>"
-                    );
+                                    "<p>" + type + " " + symbol + " " + price + " " + stockAmount + " " + fullCost
+                                    + "</p>" +
+                                    "<p>" + "Full balance: $" + newBal + "</p>");
                     myWriter.close();
                     System.out.println("wrote to file");
                 }
